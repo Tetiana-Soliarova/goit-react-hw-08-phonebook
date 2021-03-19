@@ -14,7 +14,7 @@ export const register = credentials => async dispatch => {
     dispatch(registerRequest());
      console.log(credentials);
      try {
-         const response = await axios.post('/users​/signup', credentials)
+         const response = await axios.post('/users/signup', credentials)
          dispatch(registerSuccess(response.data));
      } catch (error) {
          dispatch(registerError (error.message)) 
