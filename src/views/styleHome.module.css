@@ -1,0 +1,16 @@
+ .container {
+    min-height: calc(100vh - 50px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   /* background-image: url(telefon.png) ;
+    background-size: cover;
+    background-color: transparent;
+    opacity: 0.5;*/
+    color:  black;
+  }
+  .title {
+    font-weight: 500;
+    font-size: 48;
+    text-align: center;
+  }
