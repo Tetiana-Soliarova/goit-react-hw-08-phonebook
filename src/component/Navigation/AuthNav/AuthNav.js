@@ -1,45 +1,32 @@
-import React from 'react';
-import { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-//import router from '../../routes';
+import React from 'react'
+import { Component } from 'react'
+import { NavLink } from 'react-router-dom'
+
 import styleAuthNav from './stylesAuthNav.module.css'
-//import Modal from '../Modal/Modal'
 
-class AuthNav extends Component{
-/*state = {
-    shovModal: false,
+class AuthNav extends Component {
+  render() {
+    return (
+      <div>
+        <NavLink
+          to="/register"
+          exact
+          className={styleAuthNav.link}
+          activeClassName={styleAuthNav.activeLink}
+        >
+          Регистрация
+        </NavLink>
 
-  };
-    toggleModalCloseOpen = (e) => {
-    //const largeImageURL = e.target.dataset.sourse
-    this.setState((state) => ({ showModal: !state.showModal, <Modal/>}))
+        <NavLink
+          to="/login"
+          exact
+          className={styleAuthNav.link}
+          activeClassName={styleAuthNav.activeLink}
+        >
+          Вход
+        </NavLink>
+      </div>
+    )
   }
-*/
-    render() {
-       
-        return (
-           <div>
-                <NavLink
-                    to='/register'
-                    exact
-                    className={styleAuthNav.link}
-                    activeClassName={styleAuthNav.activeLink}
-                    //onClick={this.toggleModalCloseOpen}
-                >
-                    Регистрация
-        </NavLink>
-        
-                <NavLink
-                    to='/login'
-                    exact
-                    className={styleAuthNav.link}
-                    activeClassName={styleAuthNav.activeLink}
-                    //onClick={this.toggleModalCloseOpen}
-                >
-                    Вход
-        </NavLink>
-            </div>
-        )
-    }
-};
-export default AuthNav;
+}
+export default AuthNav

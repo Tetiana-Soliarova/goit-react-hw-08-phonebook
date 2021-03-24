@@ -11,7 +11,7 @@ import  {addContactRequest,  addContactSuccess, addContactError, deleteTodoReque
         .then(({data}) =>
             dispatch(fetchContactSuccess(data) ),
         )
-        .catch(error => dispatch(fetchContactError(error) ));
+        .catch(error => dispatch(fetchContactError(error.message) ));
 }
 
 export const addContact = (text) => dispatch => {
@@ -34,7 +34,7 @@ export const deleteTodo = contactId => dispatch => {
         .then(() =>
             dispatch(deleteTodoSuccess(contactId) ),
         )
-        .catch(error => dispatch(deleteTodoError(error) ));
+        .catch(error => dispatch(deleteTodoError(error.message) ));
 }
 
 

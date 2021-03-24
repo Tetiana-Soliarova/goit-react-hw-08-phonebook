@@ -1,56 +1,52 @@
-//import { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { Component, Suspense, lazy } from 'react'
+import { Switch, Route } from 'react-router-dom'
+import Container from './component/Container'
+import Header from './component/Header/Header'
+import { getCurrentUser } from './redux/auth/auth-operations'
+import { connect } from 'react-redux'
+import PrivateRoute from './component/PrivateRoute'
+import PublicRoute from './component/PublicRoute'
 
-import Container from './component/Container';
-import Home from './views/HomePage';
-import Register from './component/Register/Register';
-import Login from './component/Login/login'
-import Phonebook from './component/ContactForm/Phonebook'
-//import ContactList from './component/ContactList/ContactList'
-import Header from './component/Header/Header';
-//import RegisterForm from './component/Register/Register'
+const Home = lazy(() => import('./views/HomePage/HomePage'))
+const Login = lazy(() => import('./views/Login/Login'))
+const Phonebook = lazy(() => import('./component/ContactForm/Phonebook'))
+const Register = lazy(() => import('./views/Register/Register'))
 
+class App extends Component {
+  componentDidMount() {
+    this.props.onGetCurrentUser()
+  }
 
-
-
-export default function App() {
- // const dispatch = useDispatch();
-
-  /*useEffect(() => {
-    dispatch(authOperations.fetchCurrentUser());
-  }, [dispatch]);
-*/
-  return (
-    <Container>
-      <Header />
-
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/register" component={Register} />
-        <Route path="/login" component={Login} />
-        <Route path="/contacts" component={Phonebook} />
-      </Switch>
-    </Container>
-  );
-}
-
-/*class App extends Component {
   render() {
     return (
-      <div>
+      <Container>
         <Header />
 
-        <div>
-          <ContactForm />
-          <ContactList />
-        </div>
-
-
-        <RegisterForm/>
-      </div>
+        <Suspense fallback={<p>Загружаем...</p>}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <PublicRoute
+              path="/register"
+              redirectTo="/contacts"
+              restricted
+              component={Register}
+            />
+            <PublicRoute
+              path="/login"
+              redirectTo="/contacts"
+              restricted
+              component={Login}
+            />
+            <PrivateRoute path="/contacts" component={Phonebook} />
+          </Switch>
+        </Suspense>
+      </Container>
     )
   }
 }
 
-export default App
-*/
+const mapDispatchToProps = {
+  onGetCurrentUser: getCurrentUser,
+}
+
+export default connect(null, mapDispatchToProps)(App)

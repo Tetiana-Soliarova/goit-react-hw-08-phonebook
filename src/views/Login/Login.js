@@ -1,5 +1,7 @@
-import { Component } from 'react'
-import styleRegister from './styleRegister.module.css'
+import { Component } from 'react';
+import {connect} from 'react-redux'
+import styleRegister from '../Register/styleRegister.module.css';
+import {logIn} from '../../redux/auth/auth-operations'
 
 class LoginForm extends Component {
   state = {
@@ -14,19 +16,23 @@ class LoginForm extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
+    this.props.onLogin(this.state);
+
     this.setState({ name: '', email: '', password: '' })
   }
   render() {
     return (
       <form onSubmit={this.handleSubmit} className={styleRegister.demoForm}>
         <div className={styleRegister.container}>
-         
+          <h1> Страница логина</h1>
+            <hr />
+
           <div className={styleRegister.formGroup}>
             <label htmlFor="login">Почта</label>
             <input
               type="login"
               className={styleRegister.formControl}
-                        name="password"
+                        name="email"
                         onChange={this.hendleNameChange }
             />
           </div> <div className={styleRegister.formGroup}>
@@ -39,11 +45,16 @@ class LoginForm extends Component {
             />
           </div>
         </div>
-        <button type="submit" className={styleRegister.registerbtn}>
+        <button type="submit"  onSubmit={this.handleSubmit} className={styleRegister.registerbtn}>
           Войти
         </button>
       </form>
     )
   }
 }
-export default LoginForm;
+
+const mapDispatchToProps = {
+  onLogin: logIn,
+}
+
+export default connect(null, mapDispatchToProps)(LoginForm);

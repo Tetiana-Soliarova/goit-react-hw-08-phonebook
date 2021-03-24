@@ -1,4 +1,3 @@
-//import { v4 as uuidv4 } from 'uuid';
 import { createAction } from '@reduxjs/toolkit';
 
 
@@ -10,7 +9,7 @@ export const registerError = createAction('auth/registerError');
 
 export const loginRequest = createAction('auth/loginRequest');
 export const loginSuccess = createAction('auth/loginSuccess');
-export const loginError = createAction('auth/login');
+export const loginError = createAction('auth/loginError');
 
 
 

@@ -1,9 +1,6 @@
 import React from 'react'
-//import { Component } from 'react';
-//import { NavLink } from 'react-router-dom';
-//import router from '../../routes';
-//import styleNav from './stylesNav.module.css'
-
+import { connect } from 'react-redux'
+import { getIsAuthenticated } from '../../redux/auth/auth-selector'
 import MenuNav from './MenuNav/MenuNav'
 import AuthNav from './AuthNav/AuthNav'
 import UserMenu from './UserMenu/UserMenu'
@@ -16,4 +13,8 @@ const Navigation = ({ isAuthenticated }) => (
   </ul>
 )
 
-export default Navigation
+const mapStateToProps = (state) => ({
+  isAuthenticated: getIsAuthenticated(state),
+})
+
+export default connect(mapStateToProps, null)(Navigation)

@@ -1,45 +1,35 @@
-import React from 'react';
-import { Component } from 'react';
-import { NavLink } from 'react-router-dom';
-//import router from '../../routes';
+import React from 'react'
+//import { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import styleNav from './stylesNav.module.css'
-//import Modal from '../Modal/Modal'
+import { connect } from 'react-redux'
+import { getIsAuthenticated } from '../../../redux/auth/auth-selector'
 
-class MenuNav extends Component{
-/*state = {
-    shovModal: false,
+const MenuNav = ({ isAuthenticated }) => (
+  <div>
+    <NavLink
+      to="/"
+      exact
+      className={styleNav.link}
+      activeClassName={styleNav.activeLink}
+    >
+      Главная
+    </NavLink>
+    {isAuthenticated && (
+      <NavLink
+        to="/contacts"
+        exact
+        className={styleNav.link}
+        activeClassName={styleNav.activeLink}
+      >
+        Телефонный справочник
+      </NavLink>
+    )}
+  </div>
+)
 
-  };
-    toggleModalCloseOpen = (e) => {
-    //const largeImageURL = e.target.dataset.sourse
-    this.setState((state) => ({ showModal: !state.showModal, <Modal/>}))
-  }
-*/
-    render() {
-       
-        return (
-            <div>
-                <NavLink
-                   to='/'
-                    exact
-                    className={styleNav.link}
-                    activeClassName={styleNav.activeLink}
-                    //onClick={this.toggleModalCloseOpen}
-                >
-                    Главная
-        </NavLink>
-        
-                <NavLink
-                    to='/contacts'
-                    exact
-                    className={styleNav.link}
-                    activeClassName={styleNav.activeLink}
-                    //onClick={this.toggleModalCloseOpen}
-                >
-                    Телефонный справочник
-        </NavLink>
-            </div>
-        )
-    }
-};
-export default MenuNav;
+const mapStateToProps = (state) => ({
+  isAuthenticated: getIsAuthenticated(state),
+})
+
+export default connect(mapStateToProps)(MenuNav)

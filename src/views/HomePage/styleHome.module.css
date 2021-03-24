@@ -3,11 +3,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-   /* background-image: url(telefon.png) ;
-    background-size: cover;
-    background-color: transparent;
-    opacity: 0.5;*/
-    color:  black;
+   color:  black;
   }
   .title {
     font-weight: 500;
